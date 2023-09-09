@@ -1,5 +1,6 @@
 import { KeyboardEvent, ChangeEvent, useState, FC } from 'react';
 import { FilterValuesType, TaskType } from './App';
+import { Button } from './components/Button';
 
 type PropsType = {
   title: string;
@@ -48,14 +49,14 @@ export const Todolist: FC<PropsType> = ({
           onChange={inputChangeHandler}
           onKeyDown={onKeyPressHandler}
         />
-        <button onClick={addNewTask}>+</button>
+        <Button title='+' callback={addNewTask} />
       </div>
       <br />
 
       <div>
-        <button onClick={changeAllFilter}>All</button>
-        <button onClick={changeActiveFilter}>Active</button>
-        <button onClick={changeCompletedFilter}>Completed</button>
+        <Button title='All' callback={changeAllFilter} />
+        <Button title='Active' callback={changeActiveFilter} />
+        <Button title='Completed' callback={changeCompletedFilter} />
       </div>
 
       <ul>
