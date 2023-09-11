@@ -6,3 +6,25 @@
 .App > div {
   margin-right: 50px;
 }
+
+input {
+  outline: none;
+}
+
+.error {
+  border-color: red;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.active-filter {
+  background-color: aquamarine;
+}
+
+.is-done {
+  opacity: .5;
+}
