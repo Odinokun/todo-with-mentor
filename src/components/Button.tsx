@@ -5,7 +5,7 @@ interface IProps {
   callback: () => void;
 }
 
-export const Button: FC<IProps> = ({ title, callback }) => {
+export const Button: FC<IProps> = ({title, callback}) => {
   const onClickHandler = () => callback();
-  return <button onClick={onClickHandler}>{title}</button>;
+  return <button onClick={ onClickHandler }>{ title }</button>;
 };
