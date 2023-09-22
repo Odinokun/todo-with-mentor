@@ -4,6 +4,7 @@ import { v1 } from 'uuid';
 import { Todolist } from './Todolist';
 
 import './App.css';
+import { AddItemForm } from './components/AddItemForm';
 
 export type TaskType = {
   id: string;
@@ -29,7 +30,7 @@ function App() {
 
   const [todolists, setTodolists] = useState<TodolistType[]>([
     { id: todolistId1, title: 'What to learn', filter: 'all' },
-    { id: todolistId2, title: 'What to buy', filter: 'completed' },
+    { id: todolistId2, title: 'What to buy', filter: 'active' },
   ]);
 
   const [tasksObj, setTasksObj] = useState<TasksStateType>({
@@ -95,8 +96,32 @@ function App() {
     delete tasksObj[todolistId];
   };
 
+  const addTodolist = (title: string) => {
+    const newTodolistId = v1();
+    setTodolists([...todolists, { id: newTodolistId, title, filter: 'all' }]);
+    setTasksObj({
+      ...tasksObj,
+      [newTodolistId]: [],
+    });
+  };
+
+  const changeTodolistTitle = (id: string, title: string) => {
+    setTodolists(todolists.map(tl => (tl.id === id ? { ...tl, title } : tl)));
+  };
+
+  const changeTaskTitle = (id: string, title: string, todolistId: string) => {
+    setTasksObj({
+      ...tasksObj,
+      [todolistId]: tasksObj[todolistId].map(t =>
+        t.id === id ? { ...t, title } : t
+      ),
+    });
+  };
+
   return (
     <div className='App'>
+      <AddItemForm addItem={addTodolist} />
+
       {todolists.map(tl => {
         const filteredTasks = () => {
           switch (tl.filter) {
@@ -121,6 +146,8 @@ function App() {
             changeTaskStatus={changeTaskStatus}
             filter={tl.filter}
             deleteTodolist={deleteTodolist}
+            changeTodolistTitle={changeTodolistTitle}
+            changeTaskTitle={changeTaskTitle}
           />
         );
       })}
