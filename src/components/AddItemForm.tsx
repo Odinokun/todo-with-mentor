@@ -1,5 +1,6 @@
 import { KeyboardEvent, ChangeEvent, FC, useState } from 'react';
-import { Button } from './Button';
+import { IconButton, TextField } from '@mui/material';
+import { AddCircleOutline } from '@mui/icons-material';
 
 interface IProps {
   addItem: (title: string) => void;
@@ -31,14 +32,19 @@ export const AddItemForm: FC<IProps> = ({ addItem }) => {
 
   return (
     <div>
-      <input
+      <TextField
         value={value}
         onChange={inputChangeHandler}
         onKeyDown={onKeyPressHandler}
-        className={error ? 'error' : ''}
+        error={!!error}
+        label={error ? error : 'Type your text'}
+        helperText={error}
+        size='small'
+        variant='outlined'
       />
-      <Button title='+' callback={addNewTask} />
-      {error && <div className='error-message'>{error}</div>}
+      <IconButton onClick={addNewTask} color='primary'>
+        <AddCircleOutline />
+      </IconButton>
     </div>
   );
 };

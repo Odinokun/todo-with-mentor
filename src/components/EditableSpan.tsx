@@ -1,3 +1,4 @@
+import { TextField } from '@mui/material';
 import { KeyboardEvent, ChangeEvent, FC, useState } from 'react';
 
 interface IProps {
@@ -32,12 +33,14 @@ export const EditableSpan: FC<IProps> = ({ title, onChange }) => {
   return (
     <>
       {editMode ? (
-        <input
+        <TextField
           value={newTitle}
           onChange={onChangeHandler}
           onBlur={activateViewMode}
           onKeyDown={onKeyPressHandler}
           autoFocus
+          size='small'
+          variant='outlined'
         />
       ) : (
         <span onDoubleClick={activateEditMode}>{title}</span>
