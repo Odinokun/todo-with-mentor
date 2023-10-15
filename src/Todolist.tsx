@@ -22,18 +22,18 @@ type PropsType = {
 };
 
 export const Todolist: FC<PropsType> = ({
-  todolistId,
-  title,
-  tasks,
-  removeTask,
-  changeFilter,
-  addTask,
-  changeTaskStatus,
-  filter,
-  deleteTodolist,
-  changeTodolistTitle,
-  changeTaskTitle,
-}) => {
+                                          todolistId,
+                                          title,
+                                          tasks,
+                                          removeTask,
+                                          changeFilter,
+                                          addTask,
+                                          changeTaskStatus,
+                                          filter,
+                                          deleteTodolist,
+                                          changeTodolistTitle,
+                                          changeTaskTitle,
+                                        }) => {
   const addTaskHandler = (title: string) => addTask(title, todolistId);
 
   const deleteTodolistHandler = () => deleteTodolist(todolistId);
@@ -49,48 +49,48 @@ export const Todolist: FC<PropsType> = ({
   return (
     <div>
       <div>
-        <EditableSpan title={title} onChange={changeTodolistTitleHandler} />
-        <IconButton onClick={deleteTodolistHandler} size='medium' color='error'>
-          <Delete />
+        <EditableSpan title={ title } onChange={ changeTodolistTitleHandler }/>
+        <IconButton onClick={ deleteTodolistHandler } size="medium" color="error">
+          <Delete/>
         </IconButton>
       </div>
 
-      <AddItemForm addItem={addTaskHandler} />
+      <AddItemForm addItem={ addTaskHandler }/>
 
-      <br />
+      <br/>
 
       <div>
         <Button
-          onClick={changeAllFilterHandler}
-          variant={filter === 'all' ? 'contained' : 'outlined'}
-          color='success'
-          size='small'
-          sx={{ marginRight: '5px' }}
+          onClick={ changeAllFilterHandler }
+          variant={ filter === 'all' ? 'contained' : 'outlined' }
+          color="success"
+          size="small"
+          sx={ {marginRight: '5px'} }
         >
           All
         </Button>
         <Button
-          onClick={changeActiveFilterHandler}
-          variant={filter === 'active' ? 'contained' : 'outlined'}
-          color='secondary'
-          size='small'
-          sx={{ marginRight: '5px' }}
+          onClick={ changeActiveFilterHandler }
+          variant={ filter === 'active' ? 'contained' : 'outlined' }
+          color="secondary"
+          size="small"
+          sx={ {marginRight: '5px'} }
         >
           Active
         </Button>
         <Button
-          onClick={changeCompletedFilterHandler}
-          variant={filter === 'completed' ? 'contained' : 'outlined'}
-          color='primary'
-          size='small'
-          sx={{ marginRight: '5px' }}
+          onClick={ changeCompletedFilterHandler }
+          variant={ filter === 'completed' ? 'contained' : 'outlined' }
+          color="primary"
+          size="small"
+          sx={ {marginRight: '5px'} }
         >
           Completed
         </Button>
       </div>
 
       <List>
-        {tasks.map(t => {
+        { tasks.map(t => {
           const removeTaskHandler = () => removeTask(t.id, todolistId);
           const changeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) =>
             changeTaskStatus(t.id, e.currentTarget.checked, todolistId);
@@ -98,23 +98,23 @@ export const Todolist: FC<PropsType> = ({
             changeTaskTitle(t.id, title, todolistId);
 
           return (
-            <ListItem key={t.id} className={t.isDone ? 'is-done' : ''}>
+            <ListItem key={ t.id } className={ t.isDone ? 'is-done' : '' }>
               <IconButton
-                onClick={removeTaskHandler}
-                size='medium'
-                color='error'
+                onClick={ removeTaskHandler }
+                size="medium"
+                color="error"
               >
-                <Delete />
+                <Delete/>
               </IconButton>
               <Checkbox
-                color='success'
-                checked={t.isDone}
-                onChange={changeTaskStatusHandler}
+                color="success"
+                checked={ t.isDone }
+                onChange={ changeTaskStatusHandler }
               />
-              <EditableSpan title={t.title} onChange={changeTaskTitleHandler} />
+              <EditableSpan title={ t.title } onChange={ changeTaskTitleHandler }/>
             </ListItem>
           );
-        })}
+        }) }
       </List>
     </div>
   );
